@@ -105,7 +105,7 @@ const jsonLd = {
   image: "https://0xh2a.dev/profile.jpg",
   jobTitle: "Cybersecurity Analyst",
   description: "CEH Certified Cybersecurity Professional specializing in SOC Operations and Malware Analysis",
-  email: "haseeb.aliasghar@yahoo.com",
+  email: "0xh2a@proton.me",
   sameAs: [
     "https://github.com/haseebaliasghar",
     "https://linkedin.com/in/haseebaliasghar",

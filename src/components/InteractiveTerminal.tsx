@@ -45,7 +45,7 @@ Feature Engineering [██████▊░░░]  68% (Academic)`,
 
     'contact.txt': `SECURE COMMUNICATION CHANNELS
 ==============================
-> EMAIL:    haseeb.aliasghar@yahoo.com
+> EMAIL:    0xh2a@proton.me
 > GITHUB:   github.com/haseebaliasghar
 > LINKEDIN: linkedin.com/haseebaliasghar
 > PHONE:    +92 340 5767273
@@ -317,8 +317,8 @@ const commands: Record<string, (args: string[], setState?: React.Dispatch<React.
                     </pre>
                     <div className="text-[#8b949e] mt-2">
                         Ready to discuss opportunities →{' '}
-                        <a href="mailto:haseeb.aliasghar@yahoo.com" className="text-[#0ea5e9] hover:underline">
-                            haseeb.aliasghar@yahoo.com
+                        <a href="mailto:0xh2a@proton.me" className="text-[#0ea5e9] hover:underline">
+                            0xh2a@proton.me
                         </a>
                     </div>
                 </div>

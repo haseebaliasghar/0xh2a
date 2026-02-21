@@ -10,7 +10,7 @@ export default function Contact() {
     const [copied, setCopied] = useState(false);
 
     const copyEmail = () => {
-        navigator.clipboard.writeText('haseeb.aliasghar@yahoo.com');
+        navigator.clipboard.writeText('0xh2a@proton.me');
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -55,10 +55,10 @@ export default function Contact() {
                             >
                                 <span className="text-[#0ea5e9]">📧 EMAIL:</span>
                                 <a
-                                    href="mailto:haseeb.aliasghar@yahoo.com"
+                                    href="mailto:0xh2a@proton.me"
                                     className="text-[#00ff41] hover:terminal-glow transition-all flex-1"
                                 >
-                                    haseeb.aliasghar@yahoo.com
+                                    0xh2a@proton.me
                                 </a>
                                 <button
                                     onClick={copyEmail}
@@ -173,7 +173,7 @@ export default function Contact() {
 
                         <div className="space-y-4">
                             <a
-                                href="mailto:haseeb.aliasghar@yahoo.com"
+                                href="mailto:0xh2a@proton.me"
                                 className="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group"
                             >
                                 <div className="p-3 bg-blue-100 rounded-xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
@@ -181,7 +181,7 @@ export default function Contact() {
                                 </div>
                                 <div className="flex-1">
                                     <p className="text-slate-400 text-xs uppercase tracking-wide">Email</p>
-                                    <p className="text-slate-900 font-medium">haseeb.aliasghar@yahoo.com</p>
+                                    <p className="text-slate-900 font-medium">0xh2a@proton.me</p>
                                 </div>
                                 <button
                                     onClick={(e) => { e.preventDefault(); copyEmail(); }}
@@ -264,7 +264,7 @@ export default function Contact() {
                         </div>
 
                         <motion.a
-                            href="mailto:haseeb.aliasghar@yahoo.com"
+                            href="mailto:0xh2a@proton.me"
                             className="mt-8 w-full flex items-center justify-center gap-2 px-6 py-4 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
@@ -290,7 +290,7 @@ export default function Contact() {
                         <a href="https://linkedin.com/in/haseebaliasghar" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
                             <Linkedin size={20} />
                         </a>
-                        <a href="mailto:haseeb.aliasghar@yahoo.com" className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                        <a href="mailto:0xh2a@proton.me" className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
                             <Mail size={20} />
                         </a>
                     </div>
