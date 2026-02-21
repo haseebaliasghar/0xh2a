@@ -1,0 +1,1037 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  /* Terminal Mode Colors */
+  --color-terminal-bg: #0d1117;
+  --color-terminal-green: #00ff41;
+  --color-terminal-cyan: #0ea5e9;
+  --color-terminal-dim: #30363d;
+
+  /* Recruiter Mode Colors */
+  --color-recruiter-bg: #f8fafc;
+  --color-recruiter-text: #1e293b;
+  --color-recruiter-secondary: #475569;
+  --color-recruiter-accent: #3b82f6;
+
+  /* Fonts */
+  --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', 'Roboto', sans-serif;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* Terminal Mode */
+.terminal-mode {
+  background-color: #0d1117;
+  color: #00ff41;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+}
+
+/* Recruiter Mode */
+.recruiter-mode {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+/* Blinking cursor */
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Terminal text glow effect */
+.terminal-glow {
+  text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 20px #00ff41;
+}
+
+/* Subtle glow */
+.glow-subtle {
+  text-shadow: 0 0 3px currentColor;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* Staggered fade in */
+.fade-in-delay-1 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.fade-in-delay-2 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.fade-in-delay-3 {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.fade-in-delay-4 {
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.fade-in-delay-5 {
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+/* ========================================
+   CRT / TERMINAL EFFECTS
+   ======================================== */
+
+/* Scanlines overlay */
+.scanlines::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.03) 2px,
+      rgba(0, 255, 65, 0.03) 4px);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* CRT screen curvature and effects */
+.crt-overlay {
+  background: radial-gradient(ellipse at center,
+      transparent 0%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* CRT flicker animation */
+@keyframes flicker {
+  0% {
+    opacity: 0.97;
+  }
+
+  5% {
+    opacity: 0.95;
+  }
+
+  10% {
+    opacity: 0.97;
+  }
+
+  15% {
+    opacity: 0.94;
+  }
+
+  20% {
+    opacity: 0.98;
+  }
+
+  50% {
+    opacity: 0.96;
+  }
+
+  80% {
+    opacity: 0.97;
+  }
+
+  90% {
+    opacity: 0.94;
+  }
+
+  100% {
+    opacity: 0.98;
+  }
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch:hover {
+  animation: glitch 0.3s ease infinite;
+}
+
+/* Glitch text effect with color channels */
+@keyframes glitch-text {
+  0% {
+    text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00, -0.025em 0.05em 0 #0000ff;
+  }
+
+  14% {
+    text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00, -0.025em 0.05em 0 #0000ff;
+  }
+
+  15% {
+    text-shadow: -0.05em -0.025em 0 #ff0000, 0.025em 0.025em 0 #00ff00, -0.05em -0.05em 0 #0000ff;
+  }
+
+  49% {
+    text-shadow: -0.05em -0.025em 0 #ff0000, 0.025em 0.025em 0 #00ff00, -0.05em -0.05em 0 #0000ff;
+  }
+
+  50% {
+    text-shadow: 0.025em 0.05em 0 #ff0000, 0.05em 0 0 #00ff00, 0 -0.05em 0 #0000ff;
+  }
+
+  99% {
+    text-shadow: 0.025em 0.05em 0 #ff0000, 0.05em 0 0 #00ff00, 0 -0.05em 0 #0000ff;
+  }
+
+  100% {
+    text-shadow: -0.025em 0 0 #ff0000, -0.025em -0.025em 0 #00ff00, -0.025em -0.05em 0 #0000ff;
+  }
+}
+
+.glitch-text:hover {
+  animation: glitch-text 0.5s infinite;
+}
+
+/* ========================================
+   MATRIX RAIN EFFECT
+   ======================================== */
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  color: #00ff41;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  animation: matrix-fall linear infinite;
+  text-shadow: 0 0 5px #00ff41;
+}
+
+@keyframes matrix-fall {
+  0% {
+    top: -100%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   MODE TRANSITION EFFECTS
+   ======================================== */
+
+@keyframes crt-off {
+  0% {
+    transform: scale(1, 1);
+    filter: brightness(1);
+  }
+
+  60% {
+    transform: scale(1.1, 0.001);
+    filter: brightness(1.5);
+  }
+
+  100% {
+    transform: scale(0, 0);
+    filter: brightness(0);
+  }
+}
+
+@keyframes crt-on {
+  0% {
+    transform: scale(0, 0);
+    filter: brightness(0);
+  }
+
+  50% {
+    transform: scale(1.1, 0.001);
+    filter: brightness(1.5);
+  }
+
+  100% {
+    transform: scale(1, 1);
+    filter: brightness(1);
+  }
+}
+
+.crt-transition-off {
+  animation: crt-off 0.3s ease-out forwards;
+}
+
+.crt-transition-on {
+  animation: crt-on 0.3s ease-out forwards;
+}
+
+/* Static noise transition */
+@keyframes static-noise {
+
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+
+  10% {
+    background-position: -5% -10%;
+  }
+
+  20% {
+    background-position: -15% 5%;
+  }
+
+  30% {
+    background-position: 7% -25%;
+  }
+
+  40% {
+    background-position: 20% 25%;
+  }
+
+  50% {
+    background-position: -25% 10%;
+  }
+
+  60% {
+    background-position: 15% 5%;
+  }
+
+  70% {
+    background-position: 0% 15%;
+  }
+
+  80% {
+    background-position: 25% 35%;
+  }
+
+  90% {
+    background-position: -10% 10%;
+  }
+}
+
+/* ========================================
+   INTERACTIVE ELEMENTS
+   ======================================== */
+
+/* Terminal input styling */
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00ff41;
+  font-family: 'Fira Code', monospace;
+  caret-color: #00ff41;
+  width: 100%;
+}
+
+.terminal-input::placeholder {
+  color: #30363d;
+}
+
+/* Terminal window */
+.terminal-window {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background: #161b22;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #30363d;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot-red {
+  background: #ff5f56;
+}
+
+.terminal-dot-yellow {
+  background: #ffbd2e;
+}
+
+.terminal-dot-green {
+  background: #27ca40;
+}
+
+/* Command line */
+.command-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.command-prompt {
+  color: #0ea5e9;
+  white-space: nowrap;
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+.terminal-mode::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-mode::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+.terminal-mode::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 0;
+}
+
+.terminal-mode::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}
+
+.recruiter-mode::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recruiter-mode::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.recruiter-mode::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.recruiter-mode::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ========================================
+   SKILL BARS
+   ======================================== */
+
+.skill-bar {
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0;
+}
+
+.skill-bar-animated {
+  transition: width 1s ease-out;
+}
+
+/* ========================================
+   CARD EFFECTS
+   ======================================== */
+
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateZ(10px);
+}
+
+/* Glass effect for cards */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+
+@media (max-width: 640px) {
+  .terminal-mode {
+    font-size: 12px;
+  }
+
+  .scanlines::before {
+    background: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 1px,
+        rgba(0, 255, 65, 0.02) 1px,
+        rgba(0, 255, 65, 0.02) 2px);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scanlines::before,
+  .crt-overlay,
+  .matrix-bg {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .terminal-mode {
+    background: white !important;
+    color: black !important;
+  }
+
+  .scanlines::before,
+  .crt-overlay,
+  .matrix-bg {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   KONAMI CODE EASTER EGG
+   ======================================== */
+
+@keyframes rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes konami-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px #ff0000, 0 0 40px #00ff00, 0 0 60px #0000ff;
+  }
+
+  33% {
+    box-shadow: 0 0 20px #00ff00, 0 0 40px #0000ff, 0 0 60px #ff0000;
+  }
+
+  66% {
+    box-shadow: 0 0 20px #0000ff, 0 0 40px #ff0000, 0 0 60px #00ff00;
+  }
+}
+
+body.konami-active {
+  animation: rainbow 2s linear infinite;
+}
+
+body.konami-active::after {
+  content: '🎮 KONAMI CODE ACTIVATED! 🎮';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00ff41;
+  text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+  z-index: 9999;
+  animation: konami-glow 1s ease-in-out infinite;
+  padding: 20px 40px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* ========================================
+   SMOOTH SCROLL SECTIONS
+   ======================================== */
+
+section {
+  scroll-margin-top: 80px;
+}
+
+/* ========================================
+   SELECTION STYLES
+   ======================================== */
+
+.terminal-mode ::selection {
+  background: #00ff41;
+  color: #0d1117;
+}
+
+.recruiter-mode ::selection {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ========================================
+   EASTER EGG EFFECTS
+   ======================================== */
+
+/* Matrix intense mode */
+body.matrix-intense {
+  animation: matrix-flicker 0.1s infinite;
+}
+
+body.matrix-intense::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(0deg, transparent 50%, rgba(0, 255, 65, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9998;
+  animation: scanline-scroll 0.5s linear infinite;
+}
+
+@keyframes matrix-flicker {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes scanline-scroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+/* Hacking mode */
+body.hacking-mode {
+  animation: hacking-pulse 0.5s ease-in-out infinite;
+}
+
+body.hacking-mode::after {
+  content: 'ACCESSING MAINFRAME...';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Fira Code', monospace;
+  font-size: 1.5rem;
+  color: #00ff41;
+  text-shadow: 0 0 20px #00ff41;
+  z-index: 9999;
+  animation: hacking-text 0.2s steps(2) infinite;
+  pointer-events: none;
+}
+
+@keyframes hacking-pulse {
+
+  0%,
+  100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+
+  50% {
+    filter: hue-rotate(10deg) brightness(1.2);
+  }
+}
+
+@keyframes hacking-text {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Glitch effect */
+body.glitch-effect {
+  animation: glitch-shake 0.1s infinite;
+}
+
+body.glitch-effect * {
+  animation: glitch-color 0.2s infinite;
+}
+
+@keyframes glitch-shake {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-color {
+  0% {
+    filter: none;
+  }
+
+  25% {
+    filter: hue-rotate(90deg);
+  }
+
+  50% {
+    filter: hue-rotate(180deg);
+  }
+
+  75% {
+    filter: hue-rotate(270deg);
+  }
+
+  100% {
+    filter: none;
+  }
+}
+
+/* Neon theme */
+body.theme-neon .terminal-mode {
+  --terminal-green: #ff00ff;
+}
+
+body.theme-neon .terminal-glow {
+  color: #ff00ff !important;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff !important;
+}
+
+body.theme-neon .terminal-mode {
+  --color-terminal-green: #ff00ff;
+}
+
+/* ========================================
+   CLICK RIPPLE EFFECT
+   ======================================== */
+
+.click-ripple {
+  position: fixed;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--ripple-color, #00ff41);
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  animation: ripple-expand 0.6s ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes ripple-expand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.5;
+  }
+
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   TEXT SCRAMBLE EFFECT
+   ======================================== */
+
+.text-scrambling {
+  font-family: 'Fira Code', monospace;
+}
+
+/* ========================================
+   MICRO ANIMATIONS
+   ======================================== */
+
+/* Breathing effect for idle buttons */
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+.breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px currentColor;
+    opacity: 1;
+  }
+
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    opacity: 0.8;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ========================================
+   SECTION DIVIDERS
+   ======================================== */
+
+.section-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #30363d, transparent);
+  margin: 2rem 0;
+}
+
+.section-divider::before {
+  content: '//';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #0d1117;
+  padding: 0 1rem;
+  color: #30363d;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+}
+
+/* ASCII art divider */
+.ascii-divider {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.5rem;
+  color: #30363d;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: 0;
+  user-select: none;
+}
+
+/* ========================================
+   LOADING SKELETON
+   ======================================== */
+
+@keyframes skeleton-pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #161b22 25%, #1f2937 50%, #161b22 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+/* ========================================
+   RESPONSIVE CURSOR EFFECTS
+   ======================================== */
+
+@media (pointer: coarse) {
+  .cursor-trail {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   SHIMMER ANIMATION
+   ======================================== */
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* GPU acceleration for animations */
+.terminal-glow,
+.glitch-text,
+.particle-network,
+.cursor-trail {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-shimmer,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
