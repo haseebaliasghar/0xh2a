@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
 import { Analytics } from "@/components/Analytics";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Enhanced SEO metadata
 export const metadata: Metadata = {
@@ -162,6 +163,7 @@ export default function RootLayout({
           {children}
         </ClientLayout>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
